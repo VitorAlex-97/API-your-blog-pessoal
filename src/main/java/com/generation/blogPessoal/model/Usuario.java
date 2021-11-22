@@ -32,6 +32,11 @@ public class Usuario {
 	@Size(min = 2, max = 100)
 	private String nome;
 	
+	@NotBlank
+	private String token;
+	
+	private String foto;
+	
 	@ApiModelProperty(example = "email@email.com.br")
 	@NotBlank(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
@@ -63,6 +68,22 @@ public class Usuario {
 		this.nome = nome;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -85,7 +106,9 @@ public class Usuario {
 
 	public void setMinhasPostagens(List<Postagem> minhasPostagens) {
 		this.minhasPostagens = minhasPostagens;
-	}	
+	}
+
+	
 	
 	
 }
