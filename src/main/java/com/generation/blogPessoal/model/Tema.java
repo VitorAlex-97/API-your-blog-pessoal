@@ -1,5 +1,6 @@
 package com.generation.blogPessoal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,9 +24,9 @@ public class Tema {
 	@NotBlank
 	private String descricao;
 	
-	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem;
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"tema"})
+	private List<Postagem> postagem = new ArrayList<>();
 
 	
 	
