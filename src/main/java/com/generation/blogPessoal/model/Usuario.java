@@ -37,6 +37,8 @@ public class Usuario {
 	
 	private String foto;
 	
+	private String tipo;
+	
 	@ApiModelProperty(example = "email@email.com.br")
 	@NotBlank(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
@@ -84,6 +86,14 @@ public class Usuario {
 		this.foto = foto;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -108,7 +118,5 @@ public class Usuario {
 		this.minhasPostagens = minhasPostagens;
 	}
 
-	
-	
 	
 }
