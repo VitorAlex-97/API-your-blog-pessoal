@@ -32,12 +32,12 @@ public class Usuario {
 	@Size(min = 2, max = 100)
 	private String nome;
 	
-	@NotBlank
-	private String token;
-	
 	private String foto;
 	
 	private String tipo;
+	
+	@Size(max = 3000)
+	private String sobre;
 	
 	@ApiModelProperty(example = "email@email.com.br")
 	@NotBlank(message = "O atributo Usuário é Obrigatório!")
@@ -52,8 +52,6 @@ public class Usuario {
 	@JsonIgnoreProperties({"criador"})
 	private List<Postagem> minhasPostagens = new ArrayList<>();
 
-	
-	
 	public long getId() {
 		return id;
 	}
@@ -68,14 +66,6 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public String getFoto() {
@@ -109,6 +99,15 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+
+	public String getSobre() {
+		return sobre;
+	}
+
+	public void setSobre(String sobre) {
+		this.sobre = sobre;
+	}
 
 	public List<Postagem> getMinhasPostagens() {
 		return minhasPostagens;
@@ -117,6 +116,5 @@ public class Usuario {
 	public void setMinhasPostagens(List<Postagem> minhasPostagens) {
 		this.minhasPostagens = minhasPostagens;
 	}
-
 	
 }

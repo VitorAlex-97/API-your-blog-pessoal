@@ -33,12 +33,15 @@ public class UsuarioService {
 			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
 
 			if (buscaUsuario.isPresent()) {				
-				if (buscaUsuario.get().getId() != usuario.getId())
+				if (buscaUsuario.get().getId() == usuario.getId()) {
+					usuario.setSenha(criptografarSenha(usuario.getSenha()));
+				} else {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
+				}
 			}
 			
-			usuario.setSenha(criptografarSenha(usuario.getSenha()));
-			return Optional.of(usuarioRepository.save(usuario));
+			return Optional.of(usuarioRepository.save(usuario));		
+			
 		} 
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!", null);		
 	}	
@@ -48,12 +51,12 @@ public class UsuarioService {
 
 		if (usuario.isPresent()) {
 			if (compararSenhas(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
+				usuarioLogin.get().setToken(generatorBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
 				usuarioLogin.get().setId(usuario.get().getId());				
 				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setFoto(usuario.get().getFoto());
 				usuarioLogin.get().setTipo(usuario.get().getTipo());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
-				usuarioLogin.get().setToken(generatorBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
 
 				return usuarioLogin;
 			}
